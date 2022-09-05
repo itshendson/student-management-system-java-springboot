@@ -18,11 +18,9 @@ Tasks are added and refined at ongoing basis - more to come.
 - [ ] Implement objects
 - [ ] Decide whether to use in-memory or disk storage
 
-### Controller-service-repository structure
+### Project skeleton
 - [x] Create initial controller-service-repository directories
-- [ ] Create skeleton repository class
-
-### Basics
+- [ ] Create skeleton classes
 - [ ] Implement validation
 - [ ] CRUD operations
 
