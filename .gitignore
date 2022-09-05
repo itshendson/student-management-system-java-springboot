@@ -14,4 +14,4 @@ target/
 .vscode/
 
 ### Project
-*/application.yml
+*./application.yml
