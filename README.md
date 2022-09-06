@@ -25,7 +25,7 @@ Tasks are added and refined at ongoing basis - more to come.
 - [ ] CRUD operations
 
 ### Database
-- [ ] Implement connection to H2 Database
+- [x] Connect to H2 Database
 - [ ] If using in-memory, implement a loadSampleData() method
 - [ ] Figure out how to hide sensitive data like db connection
 

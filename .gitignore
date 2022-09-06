@@ -14,4 +14,4 @@ target/
 .vscode/
 
 ### Project
-*./application.yml
+env.properties
