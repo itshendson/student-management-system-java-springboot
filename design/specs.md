@@ -7,7 +7,7 @@ Decomposing specification of real world objects to Java objects.
 - String lastName
 - Faculty faculty
 - List<Course> enrolledCourses
-- BigDecimal tuitionOwed
+- double tuitionOwed
 
 #### Course
 - Long courseId
