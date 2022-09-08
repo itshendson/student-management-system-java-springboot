@@ -15,12 +15,11 @@ Tasks are added and refined at ongoing basis - more to come.
 
 ### Design Decisions
 - [x] Design and decompose objects in specs.md
-- [ ] Implement objects
 - [ ] Decide whether to use in-memory or disk storage
+- [ ] Should I separate model and entity
 
 ### Project skeleton
 - [x] Create initial controller-service-repository directories
-- [ ] Create skeleton classes
 - [ ] Implement validation
 - [ ] CRUD operations
 
