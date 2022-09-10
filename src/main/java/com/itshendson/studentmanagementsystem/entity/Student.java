@@ -15,8 +15,8 @@ public class Student {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "student_course_map",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "studentId")
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_Id")
     )
     private List<Course> enrolledCourses;
     private double tuitionOwed;
@@ -28,7 +28,7 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.faculty = faculty;
-//        this.enrolledCourses = enrolledCourses;
+        this.enrolledCourses = enrolledCourses;
         this.tuitionOwed = 0;
     }
 
@@ -66,6 +66,10 @@ public class Student {
 
     public void setEnrolledCourses(List<Course> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
+    }
+
+    public void addEnrolledCourse(Course course) {
+        enrolledCourses.add(course);
     }
 
     public double getTuitionOwed() {

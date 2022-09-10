@@ -1,6 +1,7 @@
 package com.itshendson.studentmanagementsystem.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -11,6 +12,8 @@ public class Course {
     private String courseName;
     private String courseCode;
     private int credit;
+    @ManyToMany(mappedBy = "enrolledCourses")
+    private List<Student> studentsEnrolled;
     private double costPerCredit;
     private double totalCostOfCourse;
 
@@ -51,6 +54,18 @@ public class Course {
 
     public double getCostPerCredit() {
         return costPerCredit;
+    }
+
+    public List<Student> getStudentsEnrolled() {
+        return studentsEnrolled;
+    }
+
+    public void setStudentsEnrolled(List<Student> studentsEnrolled) {
+        this.studentsEnrolled = studentsEnrolled;
+    }
+
+    public void addStudentEnrolled(Student student) {
+        studentsEnrolled.add(student);
     }
 
     public void setCostPerCredit(double costPerCredit) {
