@@ -16,7 +16,7 @@ Tasks are added and refined at ongoing basis - more to come.
 ### Design Decisions
 - [x] Design and decompose objects in specs.md
 - [ ] Decide whether to use in-memory or disk storage
-- [ ] Should I separate model and entity
+- [x] Should I separate model and entity
 
 ### Project skeleton
 - [x] Create initial controller-service-repository directories
@@ -26,7 +26,7 @@ Tasks are added and refined at ongoing basis - more to come.
 ### Database
 - [x] Connect to H2 Database
 - [ ] If using in-memory, implement a loadSampleData() method
-- [ ] Figure out how to hide sensitive data like db connection
+- [x] Figure out how to hide sensitive data like db connection
 
 ### Business Logic
 - [ ] Brainstorm list of university policies for use as business logic
