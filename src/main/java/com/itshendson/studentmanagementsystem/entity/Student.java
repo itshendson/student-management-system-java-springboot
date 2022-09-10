@@ -1,21 +1,34 @@
-package com.itshendson.studentmanagementsystem.model;
+package com.itshendson.studentmanagementsystem.entity;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long studentId;
     private String firstName;
     private String lastName;
     private Faculty faculty;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "student_course_map",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "studentId")
+    )
     private List<Course> enrolledCourses;
     private double tuitionOwed;
+
+    public Student() {
+    }
 
     public Student(String firstName, String lastName, Faculty faculty, List<Course> enrolledCourses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.faculty = faculty;
-        this.enrolledCourses = enrolledCourses;
+//        this.enrolledCourses = enrolledCourses;
         this.tuitionOwed = 0;
     }
 

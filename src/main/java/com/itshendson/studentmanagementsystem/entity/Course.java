@@ -1,8 +1,12 @@
-package com.itshendson.studentmanagementsystem.model;
+package com.itshendson.studentmanagementsystem.entity;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
 
+@Entity
 public class Course {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long courseId;
     private String courseName;
     private String courseCode;
@@ -10,13 +14,15 @@ public class Course {
     private double costPerCredit;
     private double totalCostOfCourse;
 
-    public Course(Long courseId, String courseName, String courseCode, int credit, double costPerCredit) {
-        this.courseId = courseId;
+    public Course() {
+    }
+
+    public Course(String courseName, String courseCode, int credit, double costPerCredit) {
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.credit = credit;
         this.costPerCredit = costPerCredit;
-        this.totalCostOfCourse = 0;
+        this.totalCostOfCourse = credit * costPerCredit;
     }
 
     public String getCourseName() {
