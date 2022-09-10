@@ -21,7 +21,14 @@ Tasks are added and refined at ongoing basis - more to come.
 ### Project skeleton
 - [x] Create initial controller-service-repository directories
 - [ ] Implement validation
-- [ ] CRUD operations
+
+### CRUD Operations
+- [x] GET all students
+- [ ] Create a student
+- [ ] GET a student by ID
+- [ ] GET all student matching name
+- [ ] Delete a student
+- [ ] Update a student
 
 ### Database
 - [x] Connect to H2 Database
