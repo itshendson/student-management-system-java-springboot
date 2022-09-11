@@ -1,6 +1,7 @@
 package com.itshendson.studentmanagementsystem.service;
 
 import com.itshendson.studentmanagementsystem.entity.Student;
+import com.itshendson.studentmanagementsystem.exception.StudentNotFoundException;
 import com.itshendson.studentmanagementsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,12 +29,16 @@ public class StudentService implements StudentServiceInterface {
     }
 
     @Override
-    public Student fetchStudentById(Long studentId) {
+    public Student fetchStudentById(Long studentId) throws StudentNotFoundException {
+        boolean exists = studentRepository.existsById(studentId);
+        if (!exists) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
         return studentRepository.findById(studentId).get();
     }
 
     @Override
-    public void deleteStudentById(Long studentId) {
+    public void deleteStudentById(Long studentId) throws StudentNotFoundException {
+        boolean exists = studentRepository.existsById(studentId);
+        if (!exists) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
         studentRepository.deleteById(studentId);
     }
 

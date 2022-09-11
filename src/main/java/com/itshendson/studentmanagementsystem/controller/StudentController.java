@@ -1,6 +1,7 @@
 package com.itshendson.studentmanagementsystem.controller;
 
 import com.itshendson.studentmanagementsystem.entity.Student;
+import com.itshendson.studentmanagementsystem.exception.StudentNotFoundException;
 import com.itshendson.studentmanagementsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class StudentController {
     }
 
     @GetMapping("/student/{id}")
-    public Student fetchStudentById(@PathVariable("id") Long studentId) {
+    public Student fetchStudentById(@PathVariable("id") Long studentId) throws StudentNotFoundException {
         return studentService.fetchStudentById(studentId);
     }
 
@@ -39,10 +40,8 @@ public class StudentController {
     }
 
     @DeleteMapping("/student/{id}")
-    public String deleteStudentById(@PathVariable("id") Long studentId) {
-        String message = "Student deleted.";
+    public void deleteStudentById(@PathVariable("id") Long studentId) throws StudentNotFoundException {
         studentService.deleteStudentById(studentId);
-        return message;
     }
 
     @GetMapping("/")

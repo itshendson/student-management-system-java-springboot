@@ -17,7 +17,7 @@ Tasks are added and refined at ongoing basis - more to come.
 - [x] Design and decompose objects in specs.md
 - [ ] Decide whether to use in-memory or disk storage
 - [x] Should I separate model and entity
-- [ ] Should Student constructor have an argument for Course
+- [x] Should Student constructor have an argument for Course
 
 ### Project Skeleton
 - [x] Create initial controller-service-repository directories
@@ -32,6 +32,7 @@ Tasks are added and refined at ongoing basis - more to come.
 - [ ] Update a student
 
 ### Exception Handling
+- [x] Implement StudentNotFoundException
 
 ### Database
 - [x] Connect to H2 Database
@@ -41,6 +42,7 @@ Tasks are added and refined at ongoing basis - more to come.
 ### Business Logic
 - [ ] Brainstorm list of university policies for use as business logic
 - [ ] Implement method to calculate total tuition owed by a student
+- [ ] Add Course(s) to Student, students can't take the same course twice in one semester. Max 7 courses
 
 ### Testing
 - [ ] Test Repository layer
