@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class StudentService implements StudentServiceInterface {
@@ -30,15 +32,15 @@ public class StudentService implements StudentServiceInterface {
 
     @Override
     public Student fetchStudentById(Long studentId) {
-        boolean exists = studentRepository.existsById(studentId);
-        if (!exists) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
+        Optional<Student> studentRecord = studentRepository.findById(studentId);
+        if (!studentRecord.isPresent()) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
         return studentRepository.findById(studentId).get();
     }
 
     @Override
     public void deleteStudentById(Long studentId) {
-        boolean exists = studentRepository.existsById(studentId);
-        if (!exists) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
+        Optional<Student> studentRecord = studentRepository.findById(studentId);
+        if (!studentRecord.isPresent()) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
         studentRepository.deleteById(studentId);
     }
 
@@ -47,5 +49,26 @@ public class StudentService implements StudentServiceInterface {
         return studentRepository.findByFirstNameIgnoreCase(firstName);
     }
 
+    @Override
+    public Student updateStudentById(Long studentId, Student student) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
 
+        if (!studentOptional.isPresent()) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");;
+
+        Student studentRecord = studentOptional.get();
+
+        if (Objects.nonNull(student.getFirstName()) && !"".equalsIgnoreCase(student.getFirstName())) {
+            studentRecord.setFirstName(student.getFirstName());
+        }
+
+        if (Objects.nonNull(student.getLastName()) && !"".equalsIgnoreCase(student.getLastName())) {
+            studentRecord.setLastName(student.getLastName());
+        }
+
+        if (Objects.nonNull(student.getFaculty())) {
+            studentRecord.setFaculty(student.getFaculty());
+        }
+
+        return studentRepository.save(studentRecord);
+    }
 }

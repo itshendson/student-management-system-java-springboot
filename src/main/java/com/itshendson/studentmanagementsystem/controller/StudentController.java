@@ -44,6 +44,11 @@ public class StudentController {
         studentService.deleteStudentById(studentId);
     }
 
+    @PutMapping("/student/{id}")
+    public Student updateStudentById(@PathVariable("id") Long studentId, @RequestBody Student student) {
+        return studentService.updateStudentById(studentId, student);
+    }
+
     @GetMapping("/")
     public String getHome() {
         return "Hello World";

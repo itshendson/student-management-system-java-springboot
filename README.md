@@ -23,16 +23,17 @@ Tasks are added and refined at ongoing basis - more to come.
 - [x] Create initial controller-service-repository directories
 - [ ] Implement validation
 
-### CRUD Operations
+### Student CRUD Operations
 - [x] GET all students
 - [x] Create a student
 - [x] GET a student by ID
 - [x] GET all student matching name
 - [x] Delete a student
-- [ ] Update a student
+- [x] Update a student
 
 ### Exception Handling
 - [x] Implement StudentNotFoundException
+- [ ] Implement IllegalFacultyException
 
 ### Database
 - [x] Connect to H2 Database
