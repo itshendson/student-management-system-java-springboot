@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 /**
  * This class's responsibility is to handle all exceptions that you want to send back as a response.
  */
@@ -17,8 +20,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(StudentNotFoundException.class)
-    public ResponseEntity<ErrorMessage> studentNotFoundException(StudentNotFoundException exception, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    public ResponseEntity<ErrorMessage> handleRestRequestException(StudentNotFoundException exception, WebRequest request) {
+        ErrorMessage studentNotFoundMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage(), ZonedDateTime.now(ZoneId.of("Z")));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(studentNotFoundMessage);
     }
 }

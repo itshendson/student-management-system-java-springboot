@@ -29,14 +29,14 @@ public class StudentService implements StudentServiceInterface {
     }
 
     @Override
-    public Student fetchStudentById(Long studentId) throws StudentNotFoundException {
+    public Student fetchStudentById(Long studentId) {
         boolean exists = studentRepository.existsById(studentId);
         if (!exists) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
         return studentRepository.findById(studentId).get();
     }
 
     @Override
-    public void deleteStudentById(Long studentId) throws StudentNotFoundException {
+    public void deleteStudentById(Long studentId) {
         boolean exists = studentRepository.existsById(studentId);
         if (!exists) throw new StudentNotFoundException("Student ID " + studentId + " does not exist.");
         studentRepository.deleteById(studentId);

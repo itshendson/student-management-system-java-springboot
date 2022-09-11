@@ -11,9 +11,9 @@ public interface StudentServiceInterface {
 
     List<Student> fetchStudentList();
 
-    Student fetchStudentById(Long studentId) throws StudentNotFoundException;
+    Student fetchStudentById(Long studentId);
 
-    void deleteStudentById(Long studentId) throws StudentNotFoundException;
+    void deleteStudentById(Long studentId);
 
     List<Student> fetchAllStudentsByFirstName(String firstName);
 }

@@ -1,6 +1,6 @@
 package com.itshendson.studentmanagementsystem.exception;
 
-public class StudentNotFoundException extends Exception{
+public class StudentNotFoundException extends RuntimeException{
     public StudentNotFoundException() {
         super();
     }
