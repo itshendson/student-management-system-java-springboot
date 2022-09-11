@@ -23,9 +23,26 @@ public class StudentController {
         return studentService.fetchStudentList();
     }
 
+    @GetMapping("/student/{id}")
+    public Student fetchStudentById(@PathVariable("id") Long studentId) {
+        return studentService.fetchStudentById(studentId);
+    }
+
+    @GetMapping("/student/name/{name}")
+    public List<Student> fetchAllStudentsByFirstName(@PathVariable("name") String firstName) {
+        return studentService.fetchAllStudentsByFirstName(firstName);
+    }
+
     @PostMapping("/student")
     public Student saveStudent(@RequestBody Student student) {
         return studentService.saveStudent(student);
+    }
+
+    @DeleteMapping("/student/{id}")
+    public String deleteStudentById(@PathVariable("id") Long studentId) {
+        String message = "Student deleted.";
+        studentService.deleteStudentById(studentId);
+        return message;
     }
 
     @GetMapping("/")

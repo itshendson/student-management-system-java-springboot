@@ -26,4 +26,21 @@ public class StudentService implements StudentServiceInterface {
     public List<Student> fetchStudentList() {
         return studentRepository.findAll();
     }
+
+    @Override
+    public Student fetchStudentById(Long studentId) {
+        return studentRepository.findById(studentId).get();
+    }
+
+    @Override
+    public void deleteStudentById(Long studentId) {
+        studentRepository.deleteById(studentId);
+    }
+
+    @Override
+    public List<Student> fetchAllStudentsByFirstName(String firstName) {
+        return studentRepository.findByFirstNameIgnoreCase(firstName);
+    }
+
+
 }

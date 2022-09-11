@@ -17,18 +17,21 @@ Tasks are added and refined at ongoing basis - more to come.
 - [x] Design and decompose objects in specs.md
 - [ ] Decide whether to use in-memory or disk storage
 - [x] Should I separate model and entity
+- [ ] Should Student constructor have an argument for Course
 
-### Project skeleton
+### Project Skeleton
 - [x] Create initial controller-service-repository directories
 - [ ] Implement validation
 
 ### CRUD Operations
 - [x] GET all students
-- [ ] Create a student
-- [ ] GET a student by ID
-- [ ] GET all student matching name
-- [ ] Delete a student
+- [x] Create a student
+- [x] GET a student by ID
+- [x] GET all student matching name
+- [x] Delete a student
 - [ ] Update a student
+
+### Exception Handling
 
 ### Database
 - [x] Connect to H2 Database
