@@ -18,6 +18,7 @@ Tasks are added and refined at ongoing basis - more to come.
 - [ ] Decide whether to use in-memory or disk storage
 - [x] Should I separate model and entity
 - [x] Should Student constructor have an argument for Course
+- [ ] Should I modify entity then push to DB, or modify DB then make changes on entity?
 
 ### Project Skeleton
 - [x] Create initial controller-service-repository directories
@@ -37,6 +38,7 @@ Tasks are added and refined at ongoing basis - more to come.
 
 ### Database
 - [x] Connect to H2 Database
+- [ ] For best practice, annotate entity columns (eg. column, table, unique constraint, etc.)
 - [ ] If using in-memory, implement a loadSampleData() method
 - [x] Figure out how to hide sensitive data like db connection
 
@@ -46,7 +48,7 @@ Tasks are added and refined at ongoing basis - more to come.
 - [ ] Add Course(s) to Student, students can't take the same course twice in one semester. Max 7 courses
 
 ### Testing
-- [ ] Test Repository layer
+- [x] Test Repository layer (Note: Do not need to test JpaRepository methods. You didn't write them.)
 - [ ] Test Service layer
 - [ ] Test Controller layer
 
