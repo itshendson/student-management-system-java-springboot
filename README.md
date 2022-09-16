@@ -3,6 +3,17 @@
 ## Introduction
 The purpose of this personal project is to build a Student Management System. Administrators can search, add, or edit information pertaining to students of a hypothetical higher educational institution. This project attempts to showcase several skills including but not limited to object-oriented programming, Java, Spring Boot, testing, crud operations, input validation, and controller-service-repository pattern.
 
+## Technologies
+- Java
+- Spring Boot
+- Spring Web
+- JUnit 5
+- Maven
+- Entity-Controller-Service-Repository model
+- Lombok
+- H2 in-memory database
+ 
+
 ## Tasks
 Tasks are added and refined at ongoing basis - more to come.
 
