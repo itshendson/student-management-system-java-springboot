@@ -8,6 +8,7 @@ The purpose of this personal project is to build a Student Management System. Ad
 - Spring Boot
 - Spring Web
 - JUnit 5
+- Mockito
 - Maven
 - Entity-Controller-Service-Repository model
 - Lombok
@@ -26,7 +27,7 @@ Tasks are added and refined at ongoing basis - more to come.
 
 ### Design Decisions
 - [x] Design and decompose objects in specs.md
-- [ ] Decide whether to use in-memory or disk storage
+- [x] Decide whether to use in-memory or disk storage or live database
 - [x] Should I separate model and entity
 - [x] Should Student constructor have an argument for Course
 - [ ] Should I modify entity then push to DB, or modify DB then make changes on entity?
@@ -60,7 +61,7 @@ Tasks are added and refined at ongoing basis - more to come.
 
 ### Testing
 - [x] Test Repository layer (Note: Do not need to test JpaRepository methods. You didn't write them.)
-- [ ] Test Service layer
+- [x] Test Service layer
 - [ ] Test Controller layer
 
 

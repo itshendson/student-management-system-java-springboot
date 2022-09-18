@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -27,27 +28,21 @@ class StudentServiceTest {
     private StudentRepository studentRepositoryMock;
     @InjectMocks
     private StudentService studentServiceTest;
-    private Student studentOne;
-    private Student studentTwo;
-    private Student studentThree;
+
+    private Student dummyStudentOne;
+    private Student dummyStudentTwo;
+    private Student dummyStudentThree;
 
     @BeforeEach
     void setUp() {
-        studentOne = Student.builder()
+        dummyStudentOne = Student.builder()
                 .studentId(1L)
                 .firstName("French Fries")
                 .lastName("McGovern")
                 .faculty(Faculty.BUSINESS)
                 .build();
 
-        studentTwo = Student.builder()
-                .studentId(2L)
-                .firstName("Glizzy")
-                .lastName("Golden")
-                .faculty(Faculty.COMMUNICATION)
-                .build();
-
-        studentThree = Student.builder()
+        dummyStudentTwo = Student.builder()
                 .studentId(3L)
                 .firstName("French Fries")
                 .lastName("Salty")
@@ -59,11 +54,11 @@ class StudentServiceTest {
     @Test
     void saveValidStudentTest() {
         // when
-        when(studentRepositoryMock.save(studentOne)).thenReturn(studentOne);
+        when(studentRepositoryMock.save(dummyStudentOne)).thenReturn(dummyStudentOne);
         // then
-        assertEquals(studentOne, studentServiceTest.saveStudent(studentOne));
-        verify(studentRepositoryMock).save(studentOne);
-        verify(studentRepositoryMock, times(1)).save(studentOne);
+        assertEquals(dummyStudentOne, studentServiceTest.saveStudent(dummyStudentOne));
+        verify(studentRepositoryMock).save(dummyStudentOne);
+        verify(studentRepositoryMock, times(1)).save(dummyStudentOne);
     }
 
     @Disabled
@@ -77,7 +72,7 @@ class StudentServiceTest {
     @Test
     void fetchStudentListTest() {
         // given
-        List<Student> students = Arrays.asList(studentOne);
+        List<Student> students = Arrays.asList(dummyStudentOne);
         // when
         when(studentRepositoryMock.findAll()).thenReturn(students);
         // then
@@ -89,9 +84,9 @@ class StudentServiceTest {
     @Test
     void fetchStudentByValidIdTest() {
         // when
-        when(studentRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(studentOne));
+        when(studentRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(dummyStudentOne));
         // then
-        assertEquals(studentOne, studentServiceTest.fetchStudentById(1L));
+        assertEquals(dummyStudentOne, studentServiceTest.fetchStudentById(1L));
         verify(studentRepositoryMock, times(2)).findById(1L);
     }
 
@@ -109,11 +104,103 @@ class StudentServiceTest {
     @Test
     void fetchStudentByValidFirstName() {
         // given
-        List<Student> studentsNamedFrenchFries = Arrays.asList(studentOne, studentThree);
+        List<Student> studentsNamedFrenchFries = Arrays.asList(dummyStudentOne, dummyStudentTwo);
         // when
         when(studentRepositoryMock.findByFirstNameIgnoreCase("fReNcH FrIEs")).thenReturn(studentsNamedFrenchFries);
         // then
         assertEquals(studentsNamedFrenchFries, studentServiceTest.fetchAllStudentsByFirstName("fReNcH FrIEs"));
         verify(studentRepositoryMock, times(1)).findByFirstNameIgnoreCase("fReNcH FrIEs");
+    }
+
+    @DisplayName("Run updateStudentById() to update all student fields.")
+    @Test
+    void updateValidStudentById() {
+        // given
+        dummyStudentThree = Student.builder()
+                .studentId(1L)
+                .firstName("Barry")
+                .lastName("Popper")
+                .faculty(Faculty.MEDICINE)
+                .build();
+        // when
+        when(studentRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(dummyStudentOne));
+        when(studentRepositoryMock.save(Mockito.any())).thenReturn(dummyStudentThree);
+        // then
+        assertEquals(dummyStudentThree, studentServiceTest.updateStudentById(1L, dummyStudentThree));
+        verify(studentRepositoryMock, times(1)).save(Mockito.any());
+    }
+
+    @DisplayName("Run updateStudentById() but cannot find student ID")
+    @Test
+    void updateMissingStudent() {
+        // when
+        doThrow(new StudentNotFoundException("Student ID " + 99L + " does not exist.")).when(studentRepositoryMock).findById(99L);
+        // then
+        assertThrows(StudentNotFoundException.class, () -> studentServiceTest.fetchStudentById(99L));
+        verify(studentRepositoryMock, times(1)).findById(99L);
+        verify(studentRepositoryMock, times(0)).save(Mockito.any());
+    }
+
+    @DisplayName("Run updateStudentById() but only first name is provided")
+    @Test
+    void updateStudentFirstNameOnly() {
+        // given
+        dummyStudentThree = Student.builder()
+                .studentId(1L)
+                .firstName("Barry")
+                .build();
+
+        // when
+        when(studentRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(dummyStudentOne));
+        when(studentRepositoryMock.save(Mockito.any())).thenReturn(dummyStudentThree);
+        Student resultStudent = studentServiceTest.updateStudentById(1L, dummyStudentThree);
+
+        // then
+        assertEquals(dummyStudentThree.getFirstName(), resultStudent.getFirstName());
+        assertEquals(dummyStudentThree.getLastName(), resultStudent.getLastName());
+        assertEquals(dummyStudentThree.getFaculty(), resultStudent.getFaculty());
+        verify(studentRepositoryMock, times(1)).save(Mockito.any());
+    }
+
+    @DisplayName("Run updateStudentById() but only last name is provided")
+    @Test
+    void updateStudentLastNameOnly() {
+        // given
+        dummyStudentThree = Student.builder()
+                .studentId(1L)
+                .lastName("Popper")
+                .build();
+
+        // when
+        when(studentRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(dummyStudentOne));
+        when(studentRepositoryMock.save(Mockito.any())).thenReturn(dummyStudentThree);
+        Student resultStudent = studentServiceTest.updateStudentById(1L, dummyStudentThree);
+
+        // then
+        assertEquals(dummyStudentThree.getFirstName(), resultStudent.getFirstName());
+        assertEquals(dummyStudentThree.getLastName(), resultStudent.getLastName());
+        assertEquals(dummyStudentThree.getFaculty(), resultStudent.getFaculty());
+        verify(studentRepositoryMock, times(1)).save(Mockito.any());
+    }
+
+    @DisplayName("Run updateStudentById() but only first name is provided")
+    @Test
+    void updateStudentFacultyOnly() {
+        // given
+        dummyStudentThree = Student.builder()
+                .studentId(1L)
+                .faculty(Faculty.MEDICINE)
+                .build();
+
+        // when
+        when(studentRepositoryMock.findById(1L)).thenReturn(Optional.ofNullable(dummyStudentOne));
+        when(studentRepositoryMock.save(Mockito.any())).thenReturn(dummyStudentThree);
+        Student resultStudent = studentServiceTest.updateStudentById(1L, dummyStudentThree);
+
+        // then
+        assertEquals(dummyStudentThree.getFirstName(), resultStudent.getFirstName());
+        assertEquals(dummyStudentThree.getLastName(), resultStudent.getLastName());
+        assertEquals(dummyStudentThree.getFaculty(), resultStudent.getFaculty());
+        verify(studentRepositoryMock, times(1)).save(Mockito.any());
     }
 }
